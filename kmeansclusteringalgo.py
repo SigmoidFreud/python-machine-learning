@@ -18,9 +18,9 @@ n = shape(dataSet)[1]
 centroids = mat(zeros((k,n)))
 centroids
 for j in range(n):
-  minJ = min(dataSet[:,j])
-  rangeJ = float(max(dataSet[:,j]) - minJ)
-  centroids[:,j] = minJ + rangeJ * random.rand(k,1)
+    minJ = min(dataSet[:,j])
+    rangeJ = float(max(dataSet[:,j]) - minJ)
+    centroids[:,j] = minJ + rangeJ * random.rand(k,1)
 return centroids
 
 
@@ -28,21 +28,21 @@ return centroids
 
 
 def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
-  m = shape(data)[0]
-  clusterAssment = matrix(zeros((m,2)))
-  centroids = createCent(data, k)
-  clusterChanged = True
-  while clusterChanged:
-    clusterChanged = False
-    for i in range(m):
-    minDist = inf; minIndex = -1
+    m = shape(data)[0]
+    clusterAssment = matrix(zeros((m,2)))
+    centroids = createCent(data, k)
+    clusterChanged = True
+    while clusterChanged:
+      clusterChanged = False
+      for i in range(m):
+      minDist = inf; minIndex = -1
       for j in range(k):
-        distJI = distMeas(centroids[j,:],dataSet[i,:])
-        if distJI < minDist:
-          minDist = distJI; minIndex = j
-        if clusterAssment[i,0] != minIndex: clusterChanged = True
-          clusterAssment[i,:] = minIndex,minDist**2
-      for cent in range(k):
-        ptsInClust = dataSet[nonzero(clusterAssment[:,0].A==cent)[0]]
-        centroids[cent,:] = mean(ptsInClust, axis=0)
-        return centroids, clusterAssment
+          distJI = distMeas(centroids[j,:],dataSet[i,:])
+          if distJI < minDist:
+              minDist = distJI; minIndex = j
+          if clusterAssment[i,0] != minIndex: clusterChanged = True:
+              clusterAssment[i,:] = minIndex,minDist**2
+          for cent in range(k):
+              ptsInClust = dataSet[nonzero(clusterAssment[:,0].A==cent)[0]]
+              centroids[cent,:] = mean(ptsInClust, axis=0)
+    return centroids, clusterAssment
